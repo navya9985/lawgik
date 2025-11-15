@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAwgik – Registrar Dashboard</title>
+<link rel="stylesheet" href="judge.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<!-- Header -->
+<header>
+    <div class="logo">
+        <i class="fas fa-gavel"></i>
+        <span>LAwgik</span>
+    </div>
+    <div class="profile-menu">
+        <img src="/home/rguktrkvalley/Downloads/profile.jpg" alt="Registrar Profile">
+        <div class="profile-info">
+  <p class="name" id="loggedName"></p>
+  <p class="role" id="loggedRole"></p>
+</div>
+
+        <i class="fas fa-chevron-down dropdown-icon" onclick="toggleDropdown()"></i>
+       <div class="dropdown" id="dropdown">
+  
+  <a href="#" id="logoutBtn">Logout</a>
+</div>
+
+    </div>
+</header>
+
+<!-- Sidebar -->
+<aside id="sidebar">
+  <ul id="sidebarMenu">
+    <li class="active" data-section="addAccount"><i class="fas fa-user-plus"></i> <span>Add Accounts</span></li>
+    <li data-section="addCase"><i class="fas fa-file-medical"></i> <span>Add Case</span></li>
+    <li data-section="scheduleCase"><i class="fas fa-calendar-alt"></i> <span>Schedule Case</span></li>
+    <li data-section="updateCase"><i class="fas fa-edit"></i> <span>Update Case</span></li>
+    <li data-section="pendingCases"><i class="fas fa-hourglass-half"></i> <span>Pending Cases</span></li>
+    <li data-section="resolvedCases"><i class="fas fa-check-circle"></i> <span>Resolved Cases</span></li>
+  </ul>
+</aside>
+
+
+<!-- Main Content -->
+<main>
+<!--profile section -->
+    <div id="profileSection" class="profile-card">
+  <h2>Registrar Profile</h2>
+  <div class="profile-details" id="profileDetails">
+    <p><strong>Full Name:</strong> <span id="fullName"></span></p>
+    <p><strong>DOB:</strong> <span id="dob"></span></p>
+    <p><strong>Email:</strong> <span id="email"></span></p>
+    <p><strong>Phone:</strong> <span id="phone"></span></p>
+    <p><strong>Role:</strong> <span id="role"></span></p>
+    <p><strong>Username:</strong> <span id="username"></span></p>
+  </div>
+  
+</div>
+
+    <!-- Add Account Form -->
+    <div id="addAccount" class="profile-card form-card" style="display:none;">
+        <h2>Add New Account</h2>
+        <form id="accountForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label>DOB</label>
+                <input type="date" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <select name="role" required>
+                    <option value="">Select Role</option>
+                    <option value="Judge">Judge</option>
+                    <option value="Lawyer">Lawyer</option>
+                    <option value="Public Prosecutor">Public Prosecutor</option>
+                    <option value="Registrar">Registrar</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit">Create Account</button>
+        </form>
+    </div>
+
+    <!-- Add Case Form -->
+    <div id="addCase" class="profile-card form-card" style="display:none;">
+        <h2>Create Court Case</h2>
+        <form id="caseForm">
+            <div class="form-group">
+                <label>Defendant Name</label>
+                <input type="text" name="defendantName" placeholder="Enter defendant name" required>
+            </div>
+            <div class="form-group">
+                <label>Defendant Address</label>
+                <textarea name="defendantAddress" rows="2" placeholder="Enter defendant address" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Crime Type</label>
+                <input type="text" name="crimeType" placeholder="Enter type of crime" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Crime Date</label>
+                    <input type="date" name="crimeDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Crime Location</label>
+                    <input type="text" name="crimeLocation" placeholder="Enter crime location" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Arresting Officer Name</label>
+                    <input type="text" name="arrestOfficer" placeholder="Enter officer name" required>
+                </div>
+                <div class="form-group">
+                    <label>Arrest Date</label>
+                    <input type="date" name="arrestDate" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" name="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Expected Completion Date</label>
+                    <input type="date" name="expectedCompletion" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <select name="status" required>
+                    <option value="">Select Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Ongoing">Ongoing</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Judge Name</label>
+                    <input type="text" name="judgeName" placeholder="Enter judge name" required>
+                </div>
+                <div class="form-group">
+                    <label>Public Prosecutor Name</label>
+                    <input type="text" name="prosecutorName" placeholder="Enter prosecutor name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Lawyer Name</label>
+                <input type="text" name="lawyerName" placeholder="Enter lawyer name" required>
+            </div>
+            <div class="form-group">
+                <label>Court Name</label>
+                <input type="text" name="courtName" placeholder="Enter court name" required>
+            </div>
+            <button type="submit" class="btn-submit">Create Court Case</button>
+        </form>
+    </div>
+    <!-- Schedule Case Form -->
+<div id="scheduleCase" class="profile-card form-card" style="display:none;">
+    <h2>Schedule Court Case</h2>
+    <form id="scheduleCaseForm">
+        <div class="form-group">
+  <label>Case ID</label>
+  <input type="text" name="caseId" placeholder="Enter Case ID" required>
+</div>
+
+        <div class="form-group">
+            <label>Hearing Date</label>
+            <input type="date" name="hearingDate" required>
+        </div>
+        <div class="form-group">
+            <label>Adjournment Reason</label>
+            <textarea name="adjournReason" rows="2" placeholder="Enter reason (if any)"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Proceeding Summary</label>
+            <textarea name="proceedingSummary" rows="3" placeholder="Enter summary" required></textarea>
+        </div>
+        <div class="form-group">
+            <label>Next Hearing Date</label>
+            <input type="date" name="nextHearingDate" required>
+        </div>
+        <button type="submit" class="btn-submit">Schedule Court Case</button>
+    </form>
+</div>
+
+<!-- Update Case Form -->
+<div id="updateCase" class="profile-card form-card" style="display:none;">
+  <h2>Update Case</h2>
+  
+  <!-- Step 1: Enter Case ID -->
+  <form id="updateCaseForm">
+    <div class="form-group">
+      <label>Case ID</label>
+      <input type="text" id="searchCaseId" name="caseId" placeholder="Enter Case ID" required>
+    </div>
+    <button type="submit" class="btn-submit">Get Case Details</button>
+  </form>
+
+  <!-- Step 2: Case Details (auto-filled after fetch) -->
+  <form id="caseUpdateDetails" style="display:none; margin-top:25px;">
+    <div class="form-group">
+      <label>Defendant Name</label>
+      <input type="text" name="defendantName" required>
+    </div>
+    <div class="form-group">
+      <label>Crime Type</label>
+      <input type="text" name="crimeType" required>
+    </div>
+    <div class="form-group">
+      <label>Status</label>
+      <select name="status" required>
+        <option value="Pending">Pending</option>
+        <option value="Ongoing">Ongoing</option>
+        <option value="Resolved">Resolved</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Judge Name</label>
+      <input type="text" name="judgeName" required>
+    </div>
+    <div class="form-group">
+      <label>Lawyer Name</label>
+      <input type="text" name="lawyerName" required>
+    </div>
+    <div class="form-group">
+      <label>Court Name</label>
+      <input type="text" name="courtName" required>
+    </div>
+    <button type="submit" class="btn-submit">Save Changes</button>
+  </form>
+</div>
+
+<!-- Pending Cases Section -->
+<div id="pendingCases" class="profile-card form-card" style="display:none;">
+  <h2>Pending Cases</h2>
+  <div class="table-container">
+    <table id="pendingCasesTable" class="styled-table">
+      <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Defendant</th>
+          <th>Crime Type</th>
+          <th>Judge</th>
+          <th>Lawyer</th>
+          <th>Court</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Loaded dynamically -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- Resolved Cases Section -->
+<div id="resolvedCases" class="profile-card form-card" style="display:none;">
+  <h2>Resolved Cases</h2>
+  <div class="table-container">
+    <table id="resolvedCasesTable" class="styled-table">
+      <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Defendant</th>
+          <th>Crime Type</th>
+          <th>Judge</th>
+          <th>Lawyer</th>
+          <th>Court</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data loads dynamically -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+</main>
+
+<script>
+// Show specific section
+const sections = ['profileSection','addAccount','addCase','scheduleCase','updateCase','caseHistory','pendingCases','resolvedCases','loginHistory'];
+
+document.querySelectorAll('#sidebarMenu li').forEach(item => {
+  item.addEventListener('click', () => {
+    // 🔹 Remove 'active' from all
+    document.querySelectorAll('#sidebarMenu li').forEach(li => li.classList.remove('active'));
+
+    // 🔹 Add 'active' to clicked item
+    item.classList.add('active');
+
+    // 🔹 Show corresponding section
+    const sectionId = item.getAttribute('data-section');
+    sections.forEach(sec => {
+      const el = document.getElementById(sec);
+      if (el) el.style.display = (sec === sectionId) ? 'block' : 'none';
+    });
+  });
+});
+
+
+
+// Dropdown toggle
+function toggleDropdown() {
+    const dropdown = document.getElementById('dropdown');
+    dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+}
+window.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('dropdown');
+    if (!e.target.closest('.profile-menu')) {
+        dropdown.style.display = 'none';
+    }
+});
+
+// Handle Add Account form and store in MongoDB
+document.getElementById('accountForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(this));
+
+  try {
+    const res = await fetch('http://localhost:5000/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await res.json();
+    if (!res.ok) throw new Error(result.error || 'Error creating account');
+    alert(result.message);
+    this.reset();
+  } catch (err) {
+    alert('Error: ' + err.message);
+  }
+});
+
+
+// Handle Add Case form
+document.getElementById('caseForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const form = this;
+  const data = Object.fromEntries(new FormData(form));
+  // convert empty strings into nulls or keep as needed, and dates remain strings (Mongo will parse)
+  fetch('http://localhost:5000/api/cases', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(r => r.json())
+  .then(resp => {
+    if (resp.error) throw new Error(resp.error);
+    alert(resp.message || 'Case created');
+    form.reset();
+    console.log('saved case:', resp.data);
+  })
+  .catch(err => {
+    console.error(err);
+    alert('Error: ' + (err.message || err));
+  });
+});
+
+// Handle Schedule Case form
+document.getElementById('scheduleCaseForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(this));
+  
+  try {
+    const response = await fetch('http://localhost:5000/api/schedule', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    if (response.ok) {
+      alert(result.message);
+      this.reset();
+    } else {
+      alert('Error: ' + result.error);
+    }
+  } catch (err) {
+    alert('Error: ' + err.message);
+  }
+});
+
+
+// Handle Update Case form
+// ======================== UPDATE CASE FEATURE ========================
+const getCaseForm = document.getElementById('updateCaseForm');
+const detailsForm = document.getElementById('caseUpdateDetails');
+const caseIdInput = document.getElementById('searchCaseId');
+
+// 🔹 Step 1: Fetch Case Details
+getCaseForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const caseId = caseIdInput.value.trim();
+  if (!caseId) return alert('Please enter a Case ID');
+
+  try {
+    const res = await fetch(`http://localhost:5000/api/cases/${caseId}`);
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error || 'Case not found');
+    
+    // Fill the form with fetched case details
+    for (const field in data) {
+      const input = detailsForm.querySelector(`[name="${field}"]`);
+      if (input) input.value = data[field];
+    }
+
+    detailsForm.dataset.caseId = caseId; // store ID for update
+    detailsForm.style.display = 'block';
+  } catch (err) {
+    alert('Error: ' + err.message);
+    detailsForm.style.display = 'none';
+  }
+});
+
+// 🔹 Step 2: Update Case Details
+detailsForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const caseId = this.dataset.caseId;
+  const data = Object.fromEntries(new FormData(this));
+
+  try {
+    const res = await fetch(`http://localhost:5000/api/cases/${caseId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await res.json();
+
+    if (!res.ok) throw new Error(result.error);
+    alert(result.message);
+    this.style.display = 'none';
+    getCaseForm.reset();
+  } catch (err) {
+    alert('Error: ' + err.message);
+  }
+});
+
+
+// ======================== PENDING CASES FEATURE ========================
+async function loadPendingCases() {
+  const tableBody = document.querySelector('#pendingCasesTable tbody');
+  tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Loading...</td></tr>';
+
+  try {
+    const res = await fetch('http://localhost:5000/api/cases/status/Pending');
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error || 'Failed to fetch pending cases');
+
+    if (data.length === 0) {
+      tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No pending cases found</td></tr>';
+      return;
+    }
+
+    tableBody.innerHTML = data.map(c => `
+      <tr>
+        <td>${c._id}</td>
+        <td>${c.defendantName}</td>
+        <td>${c.crimeType}</td>
+        <td>${c.judgeName}</td>
+        <td>${c.lawyerName}</td>
+        <td>${c.courtName}</td>
+        <td style="font-weight:600; color:${c.status === 'Pending' ? 'red' : 'green'}">${c.status}</td>
+      </tr>
+    `).join('');
+  } catch (err) {
+    tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:red;">Error: ${err.message}</td></tr>`;
+  }
+}
+
+// Load pending cases whenever that section is opened
+document.querySelector('[data-section="pendingCases"]').addEventListener('click', loadPendingCases);
+
+
+// ======================== RESOLVED CASES FEATURE ========================
+async function loadResolvedCases() {
+  const tableBody = document.querySelector('#resolvedCasesTable tbody');
+  tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Loading...</td></tr>';
+
+  try {
+    const res = await fetch('http://localhost:5000/api/cases/status/Resolved');
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error || 'Failed to fetch resolved cases');
+
+    if (data.length === 0) {
+      tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No resolved cases found</td></tr>';
+      return;
+    }
+
+    tableBody.innerHTML = data.map(c => `
+      <tr>
+        <td>${c._id}</td>
+        <td>${c.defendantName}</td>
+        <td>${c.crimeType}</td>
+        <td>${c.judgeName}</td>
+        <td>${c.lawyerName}</td>
+        <td>${c.courtName}</td>
+        <td>
+          <span class="status-badge status-${c.status.toLowerCase()}">${c.status}</span>
+        </td>
+      </tr>
+    `).join('');
+  } catch (err) {
+    tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:red;">Error: ${err.message}</td></tr>`;
+  }
+}
+
+// Load resolved cases whenever that section is opened
+document.querySelector('[data-section="resolvedCases"]').addEventListener('click', loadResolvedCases);
+
+
+// ======================== USER INFO FETCH + LOGOUT ========================
+async function loadUserData() {
+  const username = sessionStorage.getItem('username');
+  if (!username) {
+    window.location.href = 'home.html';
+    return;
+  }
+
+  try {
+    const res = await fetch(`http://localhost:5000/api/users/${username}`);
+    const user = await res.json();
+
+    if (!res.ok) throw new Error(user.error || 'User not found');
+
+    // Fill top right corner
+    document.getElementById('loggedName').textContent = `${user.firstName} ${user.lastName}`;
+    document.getElementById('loggedRole').textContent = user.role;
+
+    // Fill main profile section
+    document.getElementById('fullName').textContent = `${user.firstName} ${user.lastName}`;
+    document.getElementById('dob').textContent = user.dob || '-';
+    document.getElementById('email').textContent = user.email || '-';
+    document.getElementById('phone').textContent = user.phone || '-';
+    document.getElementById('role').textContent = user.role;
+    document.getElementById('username').textContent = user.username;
+
+  } catch (err) {
+    alert('Error loading user data: ' + err.message);
+    window.location.href = 'home.html';
+  }
+}
+
+//Logout Function
+function logoutUser() {
+  sessionStorage.clear();
+  window.location.href = 'home.html';
+}
+
+document.getElementById('logoutBtn').addEventListener('click', logoutUser);
+
+// Load data when dashboard opens
+loadUserData();
+
+
+
+</script>
+</body>
+</html>
+

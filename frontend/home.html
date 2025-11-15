@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LawGik – Simplifying Legal Access</title>
+  <link rel="stylesheet" href="home.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="/home/rguktrkvalley/Downloads/ec9ceb0e4e9efa6cf4ec9a87d73359c9.jpg" alt="Logo" class="logoImg" />
+      <div class="title">
+        <h3>LAWGIK</h3>
+        <h4>Empowering Legal Awareness</h4>
+      </div>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+      </ul>
+    </nav>
+    
+
+   <button class="login-btn">Login</button> 
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>Bringing <span>Law & Justice</span> Closer To You</h1>
+      <p>LawGik makes legal resources accessible, transparent, and easier to understand for everyone.</p>
+      <button class="explore-btn">Get Started</button>
+    </div>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section class="features" id="services">
+    <h2>Our Key Services ⚖️</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Case Tracker</h3>
+        <p>Track case updates, hearings, and status from one place.</p>
+      </div>
+      <div class="card">
+        <h3>Lawyer Connect</h3>
+        <p>Find trusted lawyers, book consultations, and get expert help.</p>
+      </div>
+      <div class="card">
+        <h3>Legal Learning</h3>
+        <p>Access simplified legal guides and stay informed about your rights.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <h2>About LawGik</h2>
+    <p>
+      LawGik is a modern platform that simplifies access to legal knowledge and services.
+      Whether you're a citizen, lawyer, or student — LawGik connects you with the right information,
+      tools, and professionals to make justice more approachable and transparent.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <h4>About LawGik</h4>
+        <p>LawGik bridges the gap between citizens and the legal system through technology-driven awareness.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>📧 support@lawgik.in</p>
+        <p>📞 +91 90000 11122</p>
+        <p>📍 Hyderabad, India</p>
+      </div>
+    </div>
+    <p class="copyright">© 2025 LawGik | Simplifying Legal Access</p>
+  </footer>
+  
+  <!--  LOGIN MODAL START -->
+  <div id="loginModal" class="login-modal">
+    <div class="login-box">
+      <h3>Login to LawGik</h3>
+      <form id="loginForm">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+  <!--  LOGIN MODAL END -->
+
+  <!--  LOGIN SCRIPT -->
+<script>
+  const modal = document.getElementById('loginModal');
+  document.querySelector('.login-btn').onclick = () => modal.style.display = 'flex';
+  window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target));
+
+    try {
+      const res = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || 'Login failed');
+
+      alert('✅ Login successful!');
+
+      // Store session info
+      sessionStorage.setItem('username', result.user.username);
+      sessionStorage.setItem('role', result.user.role);
+	
+	//register
+      if (result.user.role === 'Registrar') {
+  sessionStorage.setItem('username', result.user.username);
+  window.location.href = 'registrar.html';
+  //judge
+	} else if (result.user.role === 'Judge') {
+	  sessionStorage.setItem('username', result.user.username);
+	  window.location.href = 'judge.html';
+		}
+    else if (result.user.role === 'Lawyer') {
+	  sessionStorage.setItem('username', result.user.username);
+	  window.location.href = 'lawyer.html';
+		} else {
+		  alert('Access denied: role not supported.');
+		}
+
+
+    } catch (err) {
+      alert('❌ ' + err.message);
+    }
+  });
+</script>
+
+
+
+  
+</body>
+</html>
+

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawgik – Judiciary Information System</title>
+    <link rel="stylesheet" href="judge.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-gavel"></i>
+            <span>Lawgik</span>
+        </div>
+        <div class="profile-menu">
+            <img src="/home/rguktrkvalley/Downloads/profile.jpg" alt="Judge Profile">
+            <div class="profile-info">
+                <p class="name" id="judgeName"></p>
+				<p class="role" id="judgeRole"></p>
+
+            </div>
+            <i class="fas fa-chevron-down dropdown-icon" onclick="toggleDropdown()"></i>
+            <div class="dropdown" id="dropdown">
+                
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar">
+        <ul>
+            <li class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</li>
+            <li><i class="fas fa-file-alt"></i> Case ID</li>
+            <li><i class="fas fa-building"></i> Court Name</li>
+            <li><i class="fas fa-calendar-alt"></i> Hearing Date</li>
+            <li><i class="fas fa-search"></i> Keyword Search</li>
+            <li><i class="fas fa-user-shield"></i> Arresting Officer</li>
+            <li><i class="fas fa-user-tie"></i> Lawyer</li>
+           
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Dashboard -->
+        <div id="dashboardSection">
+            <div class="profile-card">
+                <h2>Judge Profile</h2>
+                <div class="profile-details">
+                    <p><strong>Full Name:</strong> <span id="fullName"></span></p>
+					<p><strong>DOB:</strong> <span id="dob"></span></p>
+					<p><strong>Email:</strong> <span id="email"></span></p>
+					<p><strong>Phone:</strong> <span id="phone"></span></p>
+					<p><strong>Role:</strong> <span id="role"></span></p>
+					<p><strong>Username:</strong> <span id="username"></span></p>
+
+                </div>
+                
+            </div>
+
+            
+          
+        
+        </div>
+
+       
+
+<!-- Case ID Section (initially hidden) -->
+<div id="caseIDSection" class="profile-card form-card" style="display:none;">
+  <h2>Search Case by ID</h2>
+  <form id="caseSearchForm">
+    <div class="form-group">
+      <label>Enter Case ID</label>
+      <input type="text" id="caseIdInput" name="caseId" placeholder="Enter valid Case ID" required />
+      <button type="submit" class="btn-submit">Search</button>
+    </div>
+  </form>
+
+  <!-- Case Result Table -->
+  <div id="caseResult" style="display:none; margin-top: 20px;">
+    <h3>Case Details</h3>
+    <table class="styled-table" id="caseDetailsTable">
+      <thead>
+        <tr>
+          <th>Defendant</th>
+          <th>Crime Type</th>
+          <th>Court</th>
+          <th>Judge</th>
+          <th>Lawyer</th>
+          <th>Status</th>
+          <th>Crime Date</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!--Court Name Section (initially hidden) -->
+<div id="courtNameSection" class="profile-card form-card" style="display:none;">
+  <h2>Search Cases by Court Name</h2>
+  <form id="courtSearchForm">
+    <div class="form-group">
+      <label>Enter Court Name</label>
+      <input type="text" id="courtNameInput" name="courtName" placeholder="Enter court name" required />
+      <button type="submit" class="btn-submit">Search</button>
+    </div>
+  </form>
+
+  <!-- Results -->
+  <div id="courtResult" style="display:none; margin-top: 20px;">
+    <h3>Cases Found</h3>
+    <table class="styled-table" id="courtDetailsTable">
+      <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Defendant</th>
+          <th>Crime Type</th>
+          <th>Judge</th>
+          <th>Lawyer</th>
+          <th>Status</th>
+          <th>Start Date</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+    
+<!--Hearing Date Section (initially hidden) -->
+<div id="hearingDateSection" class="profile-card form-card" style="display:none;">
+  <h2>Search Cases by Hearing Date</h2>
+  <form id="hearingSearchForm">
+    <div class="form-group">
+      <label>Select Hearing Date</label>
+      <input type="date" id="hearingDateInput" name="hearingDate" required />
+      <button type="submit" class="btn-submit">Search</button>
+    </div>
+  </form>
+
+  <!-- Results -->
+  <div id="hearingResult" style="display:none; margin-top: 20px;">
+    <h3>Cases Found</h3>
+    <table class="styled-table" id="hearingDetailsTable">
+      <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Defendant</th>
+          <th>Crime Type</th>
+          <th>Court</th>
+          <th>Judge</th>
+          <th>Lawyer</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!--Keyword Search Section -->
+<div id="keywordSearchSection" class="profile-card form-card" style="display:none;">
+  <h2>Search Cases by Keyword</h2>
+  <form id="keywordSearchForm">
+    <div class="form-group">
+      <label>Enter Keyword</label>
+      <input type="text" id="keywordInput" placeholder="Type any related word..." required />
+      <button type="submit" class="btn-submit">Search</button>
+    </div>
+  </form>
+  <div id="keywordResult" style="display:none; margin-top: 20px;">
+    <h3>Matching Cases</h3>
+    <table class="styled-table" id="keywordDetailsTable">
+      <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Defendant</th>
+          <th>Crime Type</th>
+          <th>Court</th>
+          <th>Judge</th>
+          <th>Lawyer</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+
+<!--Arresting Officer Section -->
+<div id="officerSection" class="profile-card form-card" style="display:none;">
+  <h2>Search Cases by Arresting Officer</h2>
+  <form id="officerSearchForm">
+    <div class="form-group">
+      <label>Enter Officer Name</label>
+      <input type="text" id="officerInput" placeholder="Enter officer name..." required />
+      <button type="submit" class="btn-submit">Search</button>
+    </div>
+  </form>
+  <div id="officerResult" style="display:none; margin-top: 20px;">
+    <h3>Cases Found</h3>
+    <table class="styled-table" id="officerDetailsTable">
+      <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Defendant</th>
+          <th>Crime Type</th>
+          <th>Court</th>
+          <th>Judge</th>
+          <th>Lawyer</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Lawyer Section -->
+<div id="lawyerSection" class="profile-card form-card" style="display:none;">
+  <h2>Search Cases by Lawyer</h2>
+  <form id="lawyerSearchForm">
+    <div class="form-group">
+      <label>Enter Lawyer Name</label>
+      <input type="text" id="lawyerInput" placeholder="Enter lawyer name..." required />
+      <button type="submit" class="btn-submit">Search</button>
+    </div>
+  </form>
+  <div id="lawyerResult" style="display:none; margin-top: 20px;">
+    <h3>Cases Found</h3>
+    <table class="styled-table" id="lawyerDetailsTable">
+      <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Defendant</th>
+          <th>Crime Type</th>
+          <th>Court</th>
+          <th>Judge</th>
+          <th>Lawyer</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+
+        
+    </main>
+    <!--Case Lookup Script -->
+<script>
+const sidebarItems = document.querySelectorAll('#sidebar li');
+const dashboard = document.getElementById('dashboardSection');
+const caseSection = document.getElementById('caseIDSection');
+const courtSection = document.getElementById('courtNameSection');
+const hearingSection = document.getElementById('hearingDateSection');
+const keywordSection = document.getElementById('keywordSearchSection');
+const officerSection = document.getElementById('officerSection');
+const lawyerSection = document.getElementById('lawyerSection');
+
+// Sidebar toggle logic
+sidebarItems.forEach(item => {
+  item.addEventListener('click', () => {
+    sidebarItems.forEach(li => li.classList.remove('active'));
+    item.classList.add('active');
+
+    const text = item.textContent.trim();
+
+    // Hide all
+    [dashboard, caseSection, courtSection, hearingSection, keywordSection, officerSection, lawyerSection]
+      .forEach(sec => sec.style.display = 'none');
+
+    // Show selected
+    if (text === 'Dashboard') dashboard.style.display = 'block';
+    if (text === 'Case ID') caseSection.style.display = 'block';
+    if (text === 'Court Name') courtSection.style.display = 'block';
+    if (text === 'Hearing Date') hearingSection.style.display = 'block';
+    if (text === 'Keyword Search') keywordSection.style.display = 'block';
+    if (text === 'Arresting Officer') officerSection.style.display = 'block';
+    if (text === 'Lawyer') lawyerSection.style.display = 'block';
+  });
+});
+
+// Reusable function to render results
+function renderCases(targetBody, data) {
+  targetBody.innerHTML = data.map(c => `
+    <tr>
+      <td>${c._id}</td>
+      <td>${c.defendantName}</td>
+      <td>${c.crimeType}</td>
+      <td>${c.courtName}</td>
+      <td>${c.judgeName}</td>
+      <td>${c.lawyerName}</td>
+      <td style="font-weight:600; color:${c.status === 'Pending' ? 'red' : 'green'}">${c.status}</td>
+    </tr>
+  `).join('');
+}
+
+//  1. Keyword Search
+document.getElementById('keywordSearchForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const key = document.getElementById('keywordInput').value.trim();
+  const tableBody = document.querySelector('#keywordDetailsTable tbody');
+  const resultDiv = document.getElementById('keywordResult');
+  if (!key) return alert('Enter a keyword');
+  try {
+    const res = await fetch(`http://localhost:5000/api/cases/search/${key}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'No results');
+    resultDiv.style.display = 'block';
+    renderCases(tableBody, data);
+  } catch (err) {
+    resultDiv.style.display = 'block';
+    tableBody.innerHTML = `<tr><td colspan="7" style="color:red;text-align:center;">${err.message}</td></tr>`;
+  }
+});
+
+//  2. Arresting Officer
+document.getElementById('officerSearchForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const officer = document.getElementById('officerInput').value.trim();
+  const tableBody = document.querySelector('#officerDetailsTable tbody');
+  const resultDiv = document.getElementById('officerResult');
+  if (!officer) return alert('Enter officer name');
+  try {
+    const res = await fetch(`http://localhost:5000/api/cases/officer/${officer}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'No results');
+    resultDiv.style.display = 'block';
+    renderCases(tableBody, data);
+  } catch (err) {
+    resultDiv.style.display = 'block';
+    tableBody.innerHTML = `<tr><td colspan="7" style="color:red;text-align:center;">${err.message}</td></tr>`;
+  }
+});
+
+//3. Lawyer
+document.getElementById('lawyerSearchForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const lawyer = document.getElementById('lawyerInput').value.trim();
+  const tableBody = document.querySelector('#lawyerDetailsTable tbody');
+  const resultDiv = document.getElementById('lawyerResult');
+  if (!lawyer) return alert('Enter lawyer name');
+  try {
+    const res = await fetch(`http://localhost:5000/api/cases/lawyer/${lawyer}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'No results');
+    resultDiv.style.display = 'block';
+    renderCases(tableBody, data);
+  } catch (err) {
+    resultDiv.style.display = 'block';
+    tableBody.innerHTML = `<tr><td colspan="7" style="color:red;text-align:center;">${err.message}</td></tr>`;
+  }
+});
+
+// 1. Case ID Search
+document.getElementById('caseSearchForm').addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const caseId = document.getElementById('caseIdInput').value.trim();
+    const tableBody = document.querySelector('#caseDetailsTable tbody');
+    const resultDiv = document.getElementById('caseResult');
+
+    if (!caseId) return alert("Enter a Case ID");
+
+    try {
+        const res = await fetch(`http://localhost:5000/api/cases/${caseId}`);
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || "Case not found");
+
+        resultDiv.style.display = 'block';
+
+        tableBody.innerHTML = `
+            <tr>
+                <td>${data.defendantName}</td>
+                <td>${data.crimeType}</td>
+                <td>${data.courtName}</td>
+                <td>${data.judgeName}</td>
+                <td>${data.lawyerName}</td>
+                <td>${data.status}</td>
+                <td>${new Date(data.crimeDate).toLocaleDateString()}</td>
+            </tr>
+        `;
+    } catch (err) {
+        resultDiv.style.display = 'block';
+        tableBody.innerHTML = `<tr><td colspan="7" style="color:red;text-align:center;">${err.message}</td></tr>`;
+    }
+});
+
+
+// 2. Court Name Search
+document.getElementById('courtSearchForm').addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const courtName = document.getElementById('courtNameInput').value.trim();
+    const tableBody = document.querySelector('#courtDetailsTable tbody');
+    const resultDiv = document.getElementById('courtResult');
+
+    if (!courtName) return alert("Enter court name");
+
+    try {
+        const res = await fetch(`http://localhost:5000/api/cases/court/${courtName}`);
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || "No cases found");
+
+        resultDiv.style.display = 'block';
+
+        tableBody.innerHTML = data.map(c => `
+            <tr>
+                <td>${c._id}</td>
+                <td>${c.defendantName}</td>
+                <td>${c.crimeType}</td>
+                <td>${c.judgeName}</td>
+                <td>${c.lawyerName}</td>
+                <td>${c.status}</td>
+                <td>${new Date(c.startDate).toLocaleDateString()}</td>
+            </tr>
+        `).join('');
+    } catch (err) {
+        resultDiv.style.display = 'block';
+        tableBody.innerHTML = `<tr><td colspan="7" style="color:red;text-align:center;">${err.message}</td></tr>`;
+    }
+});
+
+
+// 3. Hearing Date Search
+document.getElementById('hearingSearchForm').addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const hearingDate = document.getElementById('hearingDateInput').value;
+
+    const tableBody = document.querySelector('#hearingDetailsTable tbody');
+    const resultDiv = document.getElementById('hearingResult');
+
+    if (!hearingDate) return alert("Select hearing date");
+
+    try {
+        const res = await fetch(`http://localhost:5000/api/cases/hearing/${hearingDate}`);
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || "No cases found");
+
+        resultDiv.style.display = 'block';
+
+        tableBody.innerHTML = data.map(c => `
+            <tr>
+                <td>${c._id}</td>
+                <td>${c.defendantName}</td>
+                <td>${c.crimeType}</td>
+                <td>${c.courtName}</td>
+                <td>${c.judgeName}</td>
+                <td>${c.lawyerName}</td>
+                <td>${c.status}</td>
+            </tr>
+        `).join('');
+    } catch (err) {
+        resultDiv.style.display = 'block';
+        tableBody.innerHTML = `<tr><td colspan="7" style="color:red;text-align:center;">${err.message}</td></tr>`;
+    }
+});
+
+</script>
+
+
+<script src="scri.js"></script>
+</body>
+</html>
+
+
+
+
+    <script src="scri.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const username = sessionStorage.getItem('username');
+  if (!username) {
+    alert('Session expired. Please log in again.');
+    window.location.href = 'home.html';
+    return;
+  }
+
+  try {
+    const res = await fetch(`http://localhost:5000/api/users/${username}`);
+    const user = await res.json();
+
+    if (!res.ok) throw new Error(user.error || 'User not found');
+
+    // Populate top right corner
+    document.getElementById('judgeName').textContent = user.username;
+    document.getElementById('judgeRole').textContent = user.role;
+
+    //  Populate profile section
+    document.getElementById('fullName').textContent = `${user.firstName} ${user.lastName}`;
+    document.getElementById('dob').textContent = user.dob;
+    document.getElementById('email').textContent = user.email;
+    document.getElementById('phone').textContent = user.phone;
+    document.getElementById('role').textContent = user.role;
+    document.getElementById('username').textContent = user.username;
+
+  } catch (err) {
+    console.error('Error:', err);
+    alert('Failed to load profile. Please log in again.');
+    window.location.href = 'home.html';
+  }
+});
+
+//  Logout logic
+function toggleDropdown() {
+  const dropdown = document.getElementById('dropdown');
+  dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+}
+
+document.querySelector('#dropdown a:last-child').addEventListener('click', () => {
+  sessionStorage.clear();
+  alert('Logged out successfully');
+  window.location.href = 'home.html';
+});
+</script>
+
+</body>
+</html>
+

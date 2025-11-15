@@ -1,0 +1,654 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(145deg, #e0eafc, #cfdef3);
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    right: 0;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+header .logo {
+    font-size: 1.7rem;
+    color: #1e3c72;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header .logo i {
+    font-size: 1.8rem;
+}
+
+header .profile-menu {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.profile-menu:hover {
+    transform: scale(1.03);
+}
+
+.profile-menu img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #1e3c72;
+    margin-right: 12px;
+}
+
+.profile-menu .profile-info {
+    margin-right: 8px;
+    line-height: 1.1;
+}
+
+.profile-menu .name {
+    font-weight: 600;
+    color: #1e3c72;
+}
+
+.profile-menu .role {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.dropdown {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.dropdown a {
+    padding: 12px 18px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.dropdown a:hover {
+    background: #f0f4f8;
+}
+
+/* Sidebar */
+aside {
+    width: 250px;
+    background: linear-gradient(180deg, #4B6CB7, #182848);
+    color: #fff;
+    padding-top: 60px;
+    position: fixed;
+    height: 100%;
+    transition: all 0.3s;
+    overflow: hidden;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+aside ul {
+    list-style: none;
+}
+
+aside ul li {
+    padding: 18px 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    border-radius: 8px;
+}
+
+aside ul li i {
+    min-width: 20px;
+    font-size: 1.2rem;
+}
+
+aside ul li:hover,
+aside ul li.active {
+    background: rgba(255,255,255,0.15);
+    transform: translateX(5px);
+}
+
+aside ul li.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: #FFD700;
+    border-radius: 0 4px 4px 0;
+}
+
+/* Main Content */
+main {
+    margin-left: 250px;
+    padding: 90px 40px 40px 40px;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+/* Profile Card */
+.profile-card {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(15px);
+    padding: 30px 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    margin-bottom: 35px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.profile-card h2 {
+    margin-bottom: 20px;
+    color: #1e3c72;
+    letter-spacing: 0.5px;
+}
+
+.profile-details p {
+    margin: 8px 0;
+    color: #222;
+    font-weight: 500;
+}
+
+.profile-buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+}
+
+.profile-buttons button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.profile-buttons button:first-child {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+}
+
+.profile-buttons button:last-child {
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    color: #333;
+}
+
+.profile-buttons button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* Stats Cards */
+.stats-cards {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.stats-cards .card {
+    flex: 1;
+    min-width: 180px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.stats-cards .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+.stats-cards .card h3 {
+    color: #1e3c72;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.stats-cards .card p {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2a5298;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {opacity:0; transform: translateY(-10px);}
+    100% {opacity:1; transform: translateY(0);}
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    aside {
+        width: 60px;
+        border-radius: 0;
+    }
+
+    aside ul li span {
+        display: none;
+    }
+
+    header {
+        left: 60px;
+    }
+
+    main {
+        margin-left: 60px;
+        padding: 90px 20px 20px 20px;
+    }
+}
+/* Form Card */
+.form-card {
+    background: rgba(30, 60, 114, 0.15); /* Blue overlay */
+    backdrop-filter: blur(15px);
+    padding: 35px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+}
+
+.form-card h2 {
+    color: #1e3c72; /* Blue */
+    margin-bottom: 25px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+/* Form Layout */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #1e3c72; /* Blue labels */
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1px solid #1e3c72; /* Blue border */
+    outline: none;
+    background: rgba(255,255,255,0.9); /* White background */
+    color: #1e3c72; /* Blue text */
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    background: #fff;
+    box-shadow: 0 0 10px #1e3c72; /* Blue glow */
+    color: #1e3c72;
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+/* Submit Button */
+.btn-submit {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px 0;
+    border: none;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    background: #1338BE;/* Distinct color for create account */
+    color: #fff;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+    background: #1520A6 ; /* Hover effect */
+    color: #fff;
+}
+
+/* Responsive */
+@media(max-width: 700px){
+    .form-row {
+        flex-direction: column;
+    }
+}
+/* Sidebar Active Animation */
+aside ul li:hover {
+    background: #f0f0f0;
+    color: #333;
+    transform: translateX(5px);
+  }
+  
+
+aside ul li.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFD700;
+  transform: translateX(6px);
+  font-weight: 600;
+}
+
+aside ul li.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: #FFD700;
+  border-radius: 0 4px 4px 0;
+  animation: glowLine 0.4s ease;
+}
+
+@keyframes glowLine {
+  from { height: 0; opacity: 0; }
+  to { height: 100%; opacity: 1; }
+}
+
+
+/* ====== Table Styling (Pending / Resolved Cases) ====== */
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  margin-top: 20px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.styled-table thead tr {
+  background-color: #24376B;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.styled-table th, .styled-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #eef2ff;
+  transition: 0.3s;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #fff;
+}
+
+.status-pending {
+  background-color: #d9534f;
+}
+
+.status-ongoing {
+  background-color: #f0ad4e;
+}
+
+.status-resolved {
+  background-color: #5cb85c;
+}
+
+
+
+//judge css
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.styled-table thead {
+  background-color: #2d2f9e;
+  color: white;
+}
+
+.styled-table th, .styled-table td {
+  padding: 10px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f4f4f9;
+}
+
+.form-group input {
+  width: 60%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.form-group button {
+  margin-left: 10px;
+}
+
+/* ===========================
+   Lawyer – Case ID & Payment Section
+   =========================== */
+
+   .form-card {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 35px 40px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    transition: all 0.3s ease;
+}
+
+.form-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.form-card h2, 
+.form-card h3 {
+    color: #1e3c72;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+
+/* Input Fields */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #1e3c72;
+    margin-bottom: 8px;
+}
+
+.form-card input {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #1e3c72;
+    background: rgba(255,255,255,0.9);
+    color: #1e3c72;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.form-card input:focus {
+    background: #fff;
+    box-shadow: 0 0 10px rgba(30,60,114,0.3);
+    outline: none;
+}
+
+/* Submit Button */
+.btn-submit {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px 0;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #FFC107, #FFD700);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Payment Buttons */
+.payment-options {
+    display: flex;
+    gap: 15px;
+    margin: 10px 0 25px 0;
+}
+
+.pay-btn {
+    flex: 1;
+    padding: 12px 0;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.pay-btn.visa {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+.pay-btn.paypal {
+    background: linear-gradient(135deg, #0070ba, #1546a0);
+}
+
+.pay-btn.amazon {
+    background: linear-gradient(135deg, #ff9900, #ffb84d);
+    color: #222;
+}
+
+.pay-btn:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+/* Two-column row (Expiry + CVV) */
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row input {
+    flex: 1;
+}
+
+/* Animation */
+@keyframes fadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#caseForm, #paymentSection {
+    animation: fadeSlideIn 0.4s ease forwards;
+}
+
+
+

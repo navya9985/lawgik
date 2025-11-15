@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAwgik – Lawyer Dashboard</title>
+    <link rel="stylesheet" href="judge.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <body>
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fas fa-gavel"></i>
+                <span>LAwgik</span>
+            </div>
+            <div class="profile-menu">
+                <img src="https://i.pravatar.cc/50?img=32" alt="Lawyer Profile">
+                <div class="profile-info">
+                    <p class="name" id="loggedName">Navya</p>
+                    <p class="role" id="loggedRole">Lawyer</p>
+                </div>
+                
+                <i class="fas fa-chevron-down dropdown-icon" onclick="toggleDropdown()"></i>
+                <div class="dropdown" id="dropdown">
+                   
+                    <a href="#">Logout</a>
+                </div>
+                
+            </div>
+        </header>
+    
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <ul>
+                <li class="active"><i class="fas fa-file-alt"></i> Case ID</li>
+                <li><i class="fas fa-building"></i> Court Name</li>
+                <li><i class="fas fa-calendar-alt"></i> Hearing Date</li>
+                <li><i class="fas fa-search"></i> Keyword Search</li>
+                <li><i class="fas fa-gavel"></i> Case Type</li>
+                <li><i class="fas fa-user-shield"></i> Arresting Officer</li>
+                <li><i class="fas fa-user-tie"></i> Lawyer</li>
+                <li><i class="fas fa-balance-scale"></i> Public Prosecutor</li>
+            </ul>
+        </aside>
+    
+        <!-- Main Content -->
+        <main>
+            <!-- Lawyer Profile -->
+            <div class="profile-card" id="profileCard">
+                <h2>Lawyer Profile</h2>
+                <div class="profile-details">
+                    <p><strong>Full Name:</strong> <span id="fullName"></span>Navya </p>
+                    <p><strong>DOB:</strong> <span id="dob">03/03/2005</span></p>
+                    <p><strong>Email:</strong> <span id="email">pavi@rguktrkv.ac.in</span></p>
+                    <p><strong>Phone:</strong> <span id="phone">9392989058</span></p>
+                    <p><strong>Role:</strong> <span id="role">Lawyer</span></p>
+                    <p><strong>Username:</strong> <span id="username"></span>navya</p>
+
+                </div>
+                <div class="profile-buttons">
+                    <button>Edit Profile</button>
+                    <button>View Case Stats</button>
+                </div>
+            </div>
+    
+            <!-- Dynamic Search Form -->
+            <div id="searchForm" class="form-card" style="display:none;">
+                <h2 id="searchTitle">Search</h2>
+                <div class="form-group">
+                    <label id="searchLabel">Enter Value</label>
+                    <input type="text" id="searchInput" placeholder="Enter here...">
+                    <button class="btn-submit" onclick="showPayment()">Submit</button>
+                </div>
+            </div>
+    
+            <!-- Payment details section -->
+            <div id="paymentSection" class="form-card" style="display:none;">
+                <h2>Payment Details</h2>
+                <div class="form-group">
+                    <label>Lawyer Name</label>
+                    <input type="text" value="Rohit Sharma" readonly>
+                </div>
+                <div class="form-group">
+                    <label id="searchTypeDisplayLabel">Search Type</label>
+                    <input type="text" id="searchTypeDisplay" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Entered Value</label>
+                    <input type="text" id="searchValueDisplay" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="text" id="amountDisplay" value="₹429" readonly>
+                </div>
+    
+                <h3>Choose Payment Method</h3>
+                <div class="payment-options">
+                    <button class="pay-btn visa">Visa</button>
+                    <button class="pay-btn paypal">PayPal</button>
+                    <button class="pay-btn amazon">Amazon</button>
+                </div>
+    
+                <h3>Debit Card Details</h3>
+                <div class="form-group"><input type="text" placeholder="Card Holder Name"></div>
+                <div class="form-group"><input type="text" placeholder="Card Number"></div>
+                <div class="form-row">
+                    <input type="text" placeholder="Expiry Date (MM/YY)">
+                    <input type="text" placeholder="CVV">
+                </div>
+                <button class="btn-submit">Pay Now</button>
+            </div>
+        </main>
+    
+        <!-- JavaScript Section -->
+        <script>
+            // Dropdown toggle
+            function toggleDropdown() {
+                const dropdown = document.getElementById('dropdown');
+                dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+            }
+    
+            const sidebarItems = document.querySelectorAll('#sidebar ul li');
+            const profileCard = document.getElementById('profileCard');
+            const searchForm = document.getElementById('searchForm');
+            const paymentSection = document.getElementById('paymentSection');
+    
+            let currentSearchType = '';
+    
+            // When a sidebar item is clicked
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Get text (like "Court Name" or "Case ID")
+                    const text = item.textContent.trim();
+    
+                    // Highlight active item
+                    sidebarItems.forEach(li => li.classList.remove('active'));
+                    item.classList.add('active');
+    
+                    // Hide other sections
+                    profileCard.style.display = 'none';
+                    paymentSection.style.display = 'none';
+    
+                    // Show search form
+                    currentSearchType = text;
+                    document.getElementById('searchTitle').innerText = `Search by ${text}`;
+                    document.getElementById('searchLabel').innerText = `Enter ${text}`;
+                    document.getElementById('searchInput').placeholder = `Enter ${text}...`;
+                    document.getElementById('searchInput').value = "";
+                    searchForm.style.display = 'block';
+                });
+            });
+    
+            // Show Payment Section
+            function showPayment() {
+                const inputValue = document.getElementById('searchInput').value.trim();
+                if (inputValue === "") {
+                    alert("Please enter a valid value.");
+                    return;
+                }
+    
+                // Fill data in payment form
+                document.getElementById('searchTypeDisplay').value = currentSearchType;
+                document.getElementById('searchValueDisplay').value = inputValue;
+    
+                // Hide search form, show payment
+                searchForm.style.display = 'none';
+                paymentSection.style.display = 'block';
+            }
+        </script>
+        <script>
+            async function loadUserData() {
+              const username = sessionStorage.getItem('username');
+              if (!username) {
+                window.location.href = 'home.html';
+                return;
+              }
+            
+              try {
+                const res = await fetch(`http://localhost:5000/api/users/${username}`);
+                const user = await res.json();
+            
+                if (!res.ok) throw new Error(user.error || 'User not found');
+            
+                // Fill top-right corner (header)
+                document.getElementById('loggedName').textContent = `${user.firstName} ${user.lastName}`;
+                document.getElementById('loggedRole').textContent = user.role;
+            
+                // Fill main profile details
+                document.getElementById('fullName').textContent = `${user.firstName} ${user.lastName}`;
+                document.getElementById('dob').textContent = user.dob || '-';
+                document.getElementById('email').textContent = user.email || '-';
+                document.getElementById('phone').textContent = user.phone || '-';
+                document.getElementById('role').textContent = user.role;
+                document.getElementById('username').textContent = user.username;
+            
+              } catch (err) {
+                alert('Error loading user data: ' + err.message);
+                window.location.href = 'home.html';
+              }
+            }
+            
+            // Logout function
+            function logoutUser() {
+              sessionStorage.clear();
+              window.location.href = 'home.html';
+            }
+            
+            // Add event listener for logout
+            document.getElementById('logoutBtn').addEventListener('click', logoutUser);
+            
+            // Load user data when page loads
+            loadUserData();
+            </script>
+            
+    </body>
+    </html>
+    
+</body>
+</html>
+
+</html>
+
