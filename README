@@ -1,0 +1,263 @@
+Project Description: Judiciary Information System (JIS)
+1. Introduction
+
+The Judiciary Information System (JIS) is a web-based application designed to manage court cases digitally and provide easy access to past case records for judges and lawyers. The system heProject Description: Judiciary Information System (JIS)
+1. Introduction
+
+The Judiciary Information System (JIS) is a web-based application designed to manage court cases digitally and provide easy access to past case records for judges and lawyers. The system helps the registrar record case details, schedule hearings, track adjournments, and maintain complete case histories.
+
+2. Objectives
+
+To maintain digital records of all court cases.
+
+To automate hearing scheduling and show available slots.
+
+To allow judges and lawyers to search and view old cases.
+
+To maintain transparency through detailed case histories.
+
+To charge lawyers for viewing past cases.
+
+3. Key Features
+A. Case Registration
+
+Registrar enters: defendant details, crime details, arrest information, judge, prosecutor, starting date, and expected completion date.
+
+System generates a unique Case Identification Number (CIN).
+
+B. Hearing Scheduling
+
+System shows vacant time slots for hearings on working days.
+
+Supports adjournment entries and new hearing dates.
+
+Allows updating hearing summaries after each session.
+
+C. Queries Available to Registrar
+
+Pending Cases
+List sorted by CIN with defendant info, crime details, lawyer, prosecutor, and judge.
+
+Resolved Cases in a Time Period
+Lists case start date, CIN, judgment date, judge name, and summary.
+
+Cases Scheduled for a Particular Date
+
+Status of a Case by CIN
+Full case history, hearings, adjournments, and judgment.
+
+D. Access to Past Cases
+
+Judges: free access to all past cases.
+
+Lawyers: charged per case view.
+
+Keyword-based search for case histories.
+
+E. User Management
+
+Registrar can create/delete accounts for judges, lawyers, and staff.
+
+Tracks number of cases each lawyer has viewed (for billing).
+
+4. Technology Stack Used
+Frontend Technologies
+HTML
+
+Used to create the structure of all web pages including case forms, search pages, login pages, and tables.
+
+CSS
+
+Adds styling, layout, fonts, spacing, tables formatting, and responsive UI design suitable for judicial environments.
+
+JavaScript
+
+Used on client-side for validation, dynamic updates, DOM manipulation, and sending AJAX requests to the server.
+
+Backend Technologies
+Node.js
+
+Server-side runtime environment.
+
+Handles core logic like:
+
+Case registration
+
+Hearing scheduling
+
+Adjournment updates
+
+User login and authentication
+
+Tracking lawyer case views
+
+Express.js
+
+Framework for creating REST APIs.
+
+Used for routing operations such as:
+
+Adding a case
+
+Fetching pending cases
+
+Searching old cases
+
+Scheduling hearings
+
+Managing user accounts
+
+Database
+MongoDB
+
+Stores all case-related data in collections such as:
+
+Cases
+
+Hearings
+
+Judgments
+
+Users (judges, lawyers, staff)
+
+Logs (lawyer usage tracking)
+
+Benefits of MongoDB:
+
+Flexible schema (works well for complex case data)
+
+Fast search for keyword-based case retrieval
+
+Supports large datasets over years of case history
+
+5. Conclusion
+
+The Judiciary Information System (JIS) improves efficiency in court management by automating case tracking, hearing scheduling, and digital case storage. With a modern web-based architecture using HTML, CSS, JavaScript, Node.js, Express, and MongoDB, the system provides easy access to judicial information while maintaining security and accountability.lps the registrar record case details, schedule hearings, track adjournments, and maintain complete case histories.
+
+2. Objectives
+
+To maintain digital records of all court cases.
+
+To automate hearing scheduling and show available slots.
+
+To allow judges and lawyers to search and view old cases.
+
+To maintain transparency through detailed case histories.
+
+To charge lawyers for viewing past cases.
+
+3. Key Features
+A. Case Registration
+
+Registrar enters: defendant details, crime details, arrest information, judge, prosecutor, starting date, and expected completion date.
+
+System generates a unique Case Identification Number (CIN).
+
+B. Hearing Scheduling
+
+System shows vacant time slots for hearings on working days.
+
+Supports adjournment entries and new hearing dates.
+
+Allows updating hearing summaries after each session.
+
+C. Queries Available to Registrar
+
+Pending Cases
+List sorted by CIN with defendant info, crime details, lawyer, prosecutor, and judge.
+
+Resolved Cases in a Time Period
+Lists case start date, CIN, judgment date, judge name, and summary.
+
+Cases Scheduled for a Particular Date
+
+Status of a Case by CIN
+Full case history, hearings, adjournments, and judgment.
+
+D. Access to Past Cases
+
+Judges: free access to all past cases.
+
+Lawyers: charged per case view.
+
+Keyword-based search for case histories.
+
+E. User Management
+
+Registrar can create/delete accounts for judges, lawyers, and staff.
+
+Tracks number of cases each lawyer has viewed (for billing).
+
+4. Technology Stack Used
+Frontend Technologies
+HTML
+
+Used to create the structure of all web pages including case forms, search pages, login pages, and tables.
+
+CSS
+
+Adds styling, layout, fonts, spacing, tables formatting, and responsive UI design suitable for judicial environments.
+
+JavaScript
+
+Used on client-side for validation, dynamic updates, DOM manipulation, and sending AJAX requests to the server.
+
+Backend Technologies
+Node.js
+
+Server-side runtime environment.
+
+Handles core logic like:
+
+Case registration
+
+Hearing scheduling
+
+Adjournment updates
+
+User login and authentication
+
+Tracking lawyer case views
+
+Express.js
+
+Framework for creating REST APIs.
+
+Used for routing operations such as:
+
+Adding a case
+
+Fetching pending cases
+
+Searching old cases
+
+Scheduling hearings
+
+Managing user accounts
+
+Database
+MongoDB
+
+Stores all case-related data in collections such as:
+
+Cases
+
+Hearings
+
+Judgments
+
+Users (judges, lawyers, staff)
+
+Logs (lawyer usage tracking)
+
+Benefits of MongoDB:
+
+Flexible schema (works well for complex case data)
+
+Fast search for keyword-based case retrieval
+
+Supports large datasets over years of case history
+
+5. Conclusion
+
+The Judiciary Information System (JIS) improves efficiency in court management by automating case tracking, hearing scheduling, and digital case storage. With a modern web-based architecture using HTML, CSS, JavaScript, Node.js, Express, and MongoDB, the system provides easy access to judicial information while maintaining security and accountability.
