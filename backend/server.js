@@ -24,7 +24,7 @@ mongoose.connect(MONGO_URI, {
 .catch(err => { console.error('MongoDB connection error:', err); process.exit(1); });
 
 // Create case
-app.post('/api/cases', async (req, res) => {
+app.post('https://lawgik-6.onrender.com/api/cases', async (req, res) => {
   try {
     const newCase = new Case(req.body);
     await newCase.save();
@@ -35,7 +35,7 @@ app.post('/api/cases', async (req, res) => {
 });
 
 // Update case by id
-app.put('/api/cases/:id', async (req, res) => {
+app.put('https://lawgik-6.onrender.com/api/cases/:id', async (req, res) => {
   try {
     const updated = await Case.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updated) return res.status(404).json({ error: 'Case not found' });
@@ -46,7 +46,7 @@ app.put('/api/cases/:id', async (req, res) => {
 });
 
 // Get case
-app.get('/api/cases/:id', async (req, res) => {
+app.get('https://lawgik-6.onrender.com/api/cases/:id', async (req, res) => {
   try {
     const c = await Case.findById(req.params.id);
     if (!c) return res.status(404).json({ error: 'Case not found' });
@@ -57,7 +57,7 @@ app.get('/api/cases/:id', async (req, res) => {
 });
 
 // Schedule Case
-app.post('/api/schedule', async (req, res) => {
+app.post('https://lawgik-6.onrender.com/api/schedule', async (req, res) => {
   try {
     const schedule = new Schedule(req.body);
     await schedule.save();
@@ -69,7 +69,7 @@ app.post('/api/schedule', async (req, res) => {
 
 
 //  Get all pending cases
-app.get('/api/cases/status/Pending', async (req, res) => {
+app.get('https://lawgik-6.onrender.com/api/cases/status/Pending', async (req, res) => {
   try {
     const cases = await Case.find({ status: 'Pending' }).sort({ createdAt: -1 });
     res.json(cases);
@@ -79,7 +79,7 @@ app.get('/api/cases/status/Pending', async (req, res) => {
 });
 
 //Get all resolved cases
-app.get('/api/cases/status/Resolved', async (req, res) => {
+app.get('https://lawgik-6.onrender.com/api/cases/status/Resolved', async (req, res) => {
   try {
     const cases = await Case.find({ status: 'Resolved' }).sort({ updatedAt: -1 });
     res.json(cases);
@@ -89,7 +89,7 @@ app.get('/api/cases/status/Resolved', async (req, res) => {
 });
 
 //Create new account (Add Account form)
-app.post('/api/users', async (req, res) => {
+app.post('https://lawgik-6.onrender.com/api/users', async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
@@ -101,7 +101,7 @@ app.post('/api/users', async (req, res) => {
 
 
 // ✅ Get user details by username (for lawyer / registrar / judge dashboards)
-app.get('/api/users/:username', async (req, res) => {
+app.get('https://lawgik-6.onrender.com/api/users/:username', async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
 
@@ -118,7 +118,7 @@ app.get('/api/users/:username', async (req, res) => {
 
 
 //Login route (for home.html)
-app.post('/api/login', async (req, res) => {
+app.post('https://lawgik-6.onrender.com/api/login', async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await User.findOne({ username, password });
@@ -131,7 +131,7 @@ app.post('/api/login', async (req, res) => {
 
 
 //Get user details by username
-app.get('/api/users/:username', async (req, res) => {
+app.get('https://lawgik-6.onrender.com/api/users/:username', async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
     if (!user) return res.status(404).json({ error: 'User not found' });
@@ -142,7 +142,7 @@ app.get('/api/users/:username', async (req, res) => {
 });
 
 // Get Case Details by ID
-app.get('/api/cases/:id', async (req, res) => {
+app.get('https://lawgik-6.onrender.com/api/cases/:id', async (req, res) => {
   try {
     const c = await Case.findById(req.params.id);
     if (!c) return res.status(404).json({ error: 'Case not found' });
@@ -153,7 +153,7 @@ app.get('/api/cases/:id', async (req, res) => {
 });
 
 //  Get Cases by Court Name
-app.get('/api/cases/court/:courtName', async (req, res) => {
+app.get('https://lawgik-6.onrender.com/api/cases/court/:courtName', async (req, res) => {
   try {
     const court = req.params.courtName;
     const cases = await Case.find({ courtName: { $regex: new RegExp(court, 'i') } });
@@ -167,7 +167,7 @@ app.get('/api/cases/court/:courtName', async (req, res) => {
 
 // ✅ Get Cases by Hearing Date
 // Get Cases by Hearing Date (from Schedule)
-app.get('/api/cases/hearing/:hearingDate', async (req, res) => {
+app.get('https://lawgik-6.onrender.com/api/cases/hearing/:hearingDate', async (req, res) => {
   try {
     const selectedDate = new Date(req.params.hearingDate);
 
@@ -199,7 +199,7 @@ app.get('/api/cases/hearing/:hearingDate', async (req, res) => {
 
 
 // ✅ 1. Search by Keyword (matches any field)
-app.get('/api/cases/search/:keyword', async (req, res) => {
+app.get('https://lawgik-6.onrender.com/api/cases/search/:keyword', async (req, res) => {
   try {
     const key = req.params.keyword;
     const regex = new RegExp(key, 'i');
@@ -221,7 +221,7 @@ app.get('/api/cases/search/:keyword', async (req, res) => {
 });
 
 // ✅ 2. Search by Arresting Officer
-app.get('/api/cases/officer/:name', async (req, res) => {
+app.get('https://lawgik-6.onrender.com/api/cases/officer/:name', async (req, res) => {
   try {
     const officer = req.params.name;
     const cases = await Case.find({ arrestOfficer: { $regex: new RegExp(officer, 'i') } });
@@ -233,7 +233,7 @@ app.get('/api/cases/officer/:name', async (req, res) => {
 });
 
 // ✅ 3. Search by Lawyer
-app.get('/api/cases/lawyer/:name', async (req, res) => {
+app.get('https://lawgik-6.onrender.com/api/cases/lawyer/:name', async (req, res) => {
   try {
     const lawyer = req.params.name;
     const cases = await Case.find({ lawyerName: { $regex: new RegExp(lawyer, 'i') } });
