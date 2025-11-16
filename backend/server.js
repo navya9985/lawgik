@@ -10,7 +10,7 @@ const User = require('./models/User');
 const app = express();
 app.use(cors({
   origin: "https://lawgic-gx51.onrender.com"
-  ));
+}));
 app.use(bodyParser.json());
 
 // Use env var if present, otherwise local default
