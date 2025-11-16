@@ -9,7 +9,7 @@ const User = require('./models/User');
 
 const app = express();
 app.use(cors({
-  origin: "https://lawgic-gx51.onrender.com"
+  origin: "https://lawgic-4.onrender.com"
 }));
 app.use(bodyParser.json());
 
