@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Use env var if present, otherwise local default
-const MONGO_URI = process.env.MONGO_URI ?? 'mongodb+srv://pavithra_pothula:pavi_1234@namasthenode.juqmng7.mongodb.net/lawgic';
+const MONGO_URI = process.env.MONGO_URI; // ?? 'mongodb+srv://pavithra_pothula:pavi_1234@namasthenode.juqmng7.mongodb.net/lawgic';
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
